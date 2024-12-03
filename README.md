@@ -1,5 +1,5 @@
 # Manual And Automation API Testing Project 
-This project involves testing the [Mock Fake API](https://reqres.in/) using various tools and technologies including *Postman, **Newman. The purpose is to automate the testing of API endpoints to ensure their reliability and performance.
+This project involves testing the [Fake API](https://reqres.in/) using various tools and technologies including *Postman, **Newman. The purpose is to automate the testing of API endpoints to ensure their reliability and performance.
 
 [![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)](https://www.postman.com/)
 [![Newman](https://img.shields.io/badge/Newman-00BFFF?style=for-the-badge&logoColor=white)](https://github.com/postmanlabs/newman)
