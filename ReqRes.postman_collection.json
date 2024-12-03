@@ -1,0 +1,806 @@
+{
+	"info": {
+		"_postman_id": "f4a0d3be-6751-4494-b2b7-46845cc95fbf",
+		"name": "ReqRes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39879306"
+	},
+	"item": [
+		{
+			"name": "mycollection",
+			"item": [
+				{
+					"name": "Get Requests",
+					"item": [
+						{
+							"name": "List users",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"Michael\");\r",
+											"});\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"Rachel\");\r",
+											"});\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+											"});\r",
+											"\r",
+											"const schema = {\r",
+											"  \"type\": \"object\",\r",
+											"  \"properties\": {\r",
+											"    \"page\": { \"type\": \"integer\" },\r",
+											"    \"per_page\": { \"type\": \"integer\" },\r",
+											"    \"total\": { \"type\": \"integer\" },\r",
+											"    \"total_pages\": { \"type\": \"integer\" },\r",
+											"    \"data\": {\r",
+											"      \"type\": \"array\",\r",
+											"      \"items\": {\r",
+											"        \"type\": \"object\",\r",
+											"        \"properties\": {\r",
+											"          \"id\": { \"type\": \"integer\" },\r",
+											"          \"email\": { \"type\": \"string\" },\r",
+											"          \"first_name\": { \"type\": \"string\" },\r",
+											"          \"last_name\": { \"type\": \"string\" },\r",
+											"          \"avatar\": { \"type\": \"string\" }\r",
+											"        },\r",
+											"        \"required\": [\"id\", \"email\", \"first_name\", \"last_name\", \"avatar\"]\r",
+											"      }\r",
+											"    },\r",
+											"    \"support\": {\r",
+											"      \"type\": \"object\",\r",
+											"      \"properties\": {\r",
+											"        \"url\": { \"type\": \"string\" },\r",
+											"        \"text\": { \"type\": \"string\" }\r",
+											"      },\r",
+											"      \"required\": [\"url\", \"text\"]\r",
+											"    }\r",
+											"  },\r",
+											"  \"required\": [\"page\", \"per_page\", \"total\", \"total_pages\", \"data\", \"support\"]\r",
+											"};\r",
+											"\r",
+											"// Get the JSON response\r",
+											"const responseJson = pm.response.json();\r",
+											"\r",
+											"// Perform schema validation\r",
+											"pm.test(\"Response matches the schema\", function () {\r",
+											"  pm.expect(tv4.validate(responseJson, schema)).to.be.true;\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}{{Users}}?page=2",
+									"host": [
+										"{{baseUrl}}{{Users}}"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Single user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"Janet\");\r",
+											"});\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+											"});\r",
+											"// Define the schema\r",
+											"const schema = {\r",
+											"  \"type\": \"object\",\r",
+											"  \"properties\": {\r",
+											"    \"data\": {\r",
+											"      \"type\": \"object\",\r",
+											"      \"properties\": {\r",
+											"        \"id\": { \"type\": \"integer\" },\r",
+											"        \"email\": { \"type\": \"string\" },\r",
+											"        \"first_name\": { \"type\": \"string\" },\r",
+											"        \"last_name\": { \"type\": \"string\" },\r",
+											"        \"avatar\": { \"type\": \"string\" }\r",
+											"      },\r",
+											"      \"required\": [\"id\", \"email\", \"first_name\", \"last_name\", \"avatar\"]\r",
+											"    },\r",
+											"    \"support\": {\r",
+											"      \"type\": \"object\",\r",
+											"      \"properties\": {\r",
+											"        \"url\": { \"type\": \"string\" },\r",
+											"        \"text\": { \"type\": \"string\" }\r",
+											"      },\r",
+											"      \"required\": [\"url\", \"text\"]\r",
+											"    }\r",
+											"  },\r",
+											"  \"required\": [\"data\", \"support\"]\r",
+											"};\r",
+											"\r",
+											"// Parse the JSON response\r",
+											"const responseJson = pm.response.json();\r",
+											"\r",
+											"// Perform schema validation\r",
+											"pm.test(\"Response matches the schema\", function () {\r",
+											"  pm.expect(tv4.validate(responseJson, schema)).to.be.true;\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}{{Users}}/2",
+									"host": [
+										"{{baseUrl}}{{Users}}"
+									],
+									"path": [
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Single user not found",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"{}\");\r",
+											"});\r",
+											"pm.test(\"Response time is less than 1000ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}{{Users}}/23",
+									"host": [
+										"{{baseUrl}}{{Users}}"
+									],
+									"path": [
+										"23"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List <resource>",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"tigerlily\");\r",
+											"});\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+											"});\r",
+											"// Define the schema\r",
+											"// Define the schema\r",
+											"const schema = {\r",
+											"  \"type\": \"object\",\r",
+											"  \"properties\": {\r",
+											"    \"page\": { \"type\": \"integer\" },\r",
+											"    \"per_page\": { \"type\": \"integer\" },\r",
+											"    \"total\": { \"type\": \"integer\" },\r",
+											"    \"total_pages\": { \"type\": \"integer\" },\r",
+											"    \"data\": {\r",
+											"      \"type\": \"array\",\r",
+											"      \"items\": {\r",
+											"        \"type\": \"object\",\r",
+											"        \"properties\": {\r",
+											"          \"id\": { \"type\": \"integer\" },\r",
+											"          \"name\": { \"type\": \"string\" },\r",
+											"          \"year\": { \"type\": \"integer\" },\r",
+											"          \"color\": { \"type\": \"string\" },\r",
+											"          \"pantone_value\": { \"type\": \"string\" }\r",
+											"        },\r",
+											"        \"required\": [\"id\", \"name\", \"year\", \"color\", \"pantone_value\"]\r",
+											"      }\r",
+											"    },\r",
+											"    \"support\": {\r",
+											"      \"type\": \"object\",\r",
+											"      \"properties\": {\r",
+											"        \"url\": { \"type\": \"string\" },\r",
+											"        \"text\": { \"type\": \"string\" }\r",
+											"      },\r",
+											"      \"required\": [\"url\", \"text\"]\r",
+											"    }\r",
+											"  },\r",
+											"  \"required\": [\"page\", \"per_page\", \"total\", \"total_pages\", \"data\", \"support\"]\r",
+											"};\r",
+											"\r",
+											"// Get the JSON response\r",
+											"const responseJson = pm.response.json();\r",
+											"\r",
+											"// Perform schema validation\r",
+											"pm.test(\"Response matches the schema\", function () {\r",
+											"  pm.expect(tv4.validate(responseJson, schema)).to.be.true;\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}{{Unknown}}",
+									"host": [
+										"{{baseUrl}}{{Unknown}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Single <resource>",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"fuchsia rose\");\r",
+											"});\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+											"});\r",
+											"const schema = {\r",
+											"  \"type\": \"object\",\r",
+											"  \"properties\": {\r",
+											"    \"data\": {\r",
+											"      \"type\": \"object\",\r",
+											"      \"properties\": {\r",
+											"        \"id\": { \"type\": \"integer\" },\r",
+											"        \"name\": { \"type\": \"string\" },\r",
+											"        \"year\": { \"type\": \"integer\" },\r",
+											"        \"color\": { \"type\": \"string\" },\r",
+											"        \"pantone_value\": { \"type\": \"string\" }\r",
+											"      },\r",
+											"      \"required\": [\"id\", \"name\", \"year\", \"color\", \"pantone_value\"]\r",
+											"    },\r",
+											"    \"support\": {\r",
+											"      \"type\": \"object\",\r",
+											"      \"properties\": {\r",
+											"        \"url\": { \"type\": \"string\" },\r",
+											"        \"text\": { \"type\": \"string\" }\r",
+											"      },\r",
+											"      \"required\": [\"url\", \"text\"]\r",
+											"    }\r",
+											"  },\r",
+											"  \"required\": [\"data\", \"support\"]\r",
+											"};\r",
+											"\r",
+											"// Parse the JSON response\r",
+											"const responseJson = pm.response.json();\r",
+											"\r",
+											"// Perform schema validation\r",
+											"pm.test(\"Response matches the schema\", function () {\r",
+											"  pm.expect(tv4.validate(responseJson, schema)).to.be.true;\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}{{Unknown}}/2",
+									"host": [
+										"{{baseUrl}}{{Unknown}}"
+									],
+									"path": [
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Single <resource> not found",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"{}\");\r",
+											"});\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}{{Unknown}}/23",
+									"host": [
+										"{{baseUrl}}{{Unknown}}"
+									],
+									"path": [
+										"23"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Post Requests",
+					"item": [
+						{
+							"name": "Create",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"leader\");\r",
+											"});\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"morpheus\",\r\n    \"job\": \"leader\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}{{Users}}",
+									"host": [
+										"{{baseUrl}}{{Users}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"zion resident\");\r",
+											"});\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"morpheus\",\r\n    \"job\": \"zion resident\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}{{Users}}/2",
+									"host": [
+										"{{baseUrl}}{{Users}}"
+									],
+									"path": [
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"zion resident\");\r",
+											"});\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"morpheus\",\r\n    \"job\": \"zion resident\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}{{Users}}/2",
+									"host": [
+										"{{baseUrl}}{{Users}}"
+									],
+									"path": [
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(204);\r",
+											"});\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}{{Users}}/2",
+									"host": [
+										"{{baseUrl}}{{Users}}"
+									],
+									"path": [
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Register",
+					"item": [
+						{
+							"name": "Register - successful",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(4);\r",
+											"});\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"eve.holt@reqres.in\",\r\n    \"password\": \"pistol\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}{{Register}}",
+									"host": [
+										"{{baseUrl}}{{Register}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register - unsuccessful",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"Missing password\");\r",
+											"});\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"sydney@fife\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}{{Register}}",
+									"host": [
+										"{{baseUrl}}{{Register}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"item": [
+						{
+							"name": "Login - successful",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"QpwL5tke4Pnpja7X4\");\r",
+											"});\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"eve.holt@reqres.in\",\r\n    \"password\": \"cityslicka\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}{{Login}}",
+									"host": [
+										"{{baseUrl}}{{Login}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login - unsuccessful",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"Missing password\");\r",
+											"});\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"peter@klaven\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}{{Login}}",
+									"host": [
+										"{{baseUrl}}{{Login}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delayed response",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"charles.morris@reqres.in\");\r",
+											"});\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(10000);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}{{Users}}?delay=3",
+									"host": [
+										"{{baseUrl}}{{Users}}"
+									],
+									"query": [
+										{
+											"key": "delay",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

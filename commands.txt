@@ -1,0 +1,8 @@
+cd C:\Users\omar.elsayed\Documents\My_Api_Project
+
+
+newman run "ReqRes.postman_collection.json" -e "my env.postman_environment.json"
+
+
+
+newman run "ReqRes.postman_collection.json" -e "my env.postman_environment.json" -r htmlextra
